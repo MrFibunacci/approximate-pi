@@ -16,42 +16,57 @@ double fRand(double fMin, double fMax)
     return fMin + f * (fMax - fMin);
 }
 
+double approximatePI(unsigned long long inCircle, unsigned long long total)
+{
+    return (4 * ((float)inCircle / total));
+}
+
 int main()
 {
-    // store dots in vector
-    std::vector<Point> points;
     // setup some values
-    //int32_t max_points = std::numeric_limits<int32_t>::max();
-    int max_points = std::numeric_limits<int>::max()/2;
-    int radius = 200;
+    const int max_executions = 100;
+    const int sims_per_exec  = 20'000'000;
 
-    double pi;
+    double radius = 200.0f;
 
-    // init dots
-    for(int i = 0; i < max_points; i++)
+    double myPi;
+
+    unsigned long long points_in_circle = 0;
+    unsigned long long points_total     = 0;
+
+    std::cout.precision(15);
+
+    // loop throu all point and check if they are in the "circle" and init dots    
+    for(int i = 0; i < max_executions; ++i)
     {
-        Point temp_point;
-        temp_point.x = fRand(-radius, radius);
-        temp_point.y = fRand(-radius, radius);
-        points.push_back(temp_point);
-    }
-    
-    // loop throu all point and check if they are in the "circle"
-    int circle_count = 0;
-    for(int32_t i = 0; i <= points.size(); i++)
-    {
-        double distance_centre = points[i].x * points[i].x + points[i].y * points[i].y;
-        if(distance_centre <= (double) radius * (double) radius)
-        {
-            circle_count++;
+        for (int j = 0; j < sims_per_exec; ++j) {
+            Point temp_point;
+            temp_point.x = fRand(-radius, radius);
+            temp_point.y = fRand(-radius, radius);
+            
+            ++points_total;
+
+            double distance_centre = temp_point.x * temp_point.x + temp_point.y * temp_point.y;
+            if(distance_centre <= radius * radius)
+            {
+                ++points_in_circle;
+            }
         }
+
+        myPi = approximatePI(points_in_circle, points_total);
+
+        // show some hot data
+        system("clear");
+        std::cout << "\nIteration:        " << i + 1 << std::endl;
+        std::cout << "Points in circle: " << points_in_circle << std::endl;
+        std::cout << "Points in total:  " << points_total << std::endl;
+        std::cout << "PI:               " << std::fixed << myPi << std::endl;
     }
 
-    pi = (4 * ( (double) circle_count / points.size()));
+    myPi = approximatePI(points_in_circle, points_total);
 
-    double diff = (M_PI-pi);
+    double diff = M_PI - myPi;
 
-    std::cout.precision(std::numeric_limits<double>::max());
     std::cout << std::fixed << diff << std::endl;
 
     return 0;
