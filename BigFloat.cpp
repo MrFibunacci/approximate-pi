@@ -1101,8 +1101,8 @@ double BigFloat::ToDouble() const
 	if(error)
 	{
 		// becaues this IDE is a dick
-		//var=std::nan("");
-		var=std::strtod("NAN()", (char**)nullptr);
+		var=std::nan("");
+		//var=std::strtod("NAN()", (char**)nullptr);
 		return var;
 	}
 	
@@ -1136,8 +1136,8 @@ float BigFloat::ToFloat() const
 	if(error)
 	{
 		// becaues this IDE is a dick
-		//var=std::nan("");
-		var=std::strtod("NAN()", (char**)nullptr);
+		var=std::nan("");
+		//var=std::strtod("NAN()", (char**)nullptr);
 		return var;
 	}
 	
@@ -1307,4 +1307,9 @@ std::string BigFloat::Exp() const
 		}
 	}
 	return out.str();
+};
+
+void BigFloat::abs()
+{
+	sign = 0;
 };

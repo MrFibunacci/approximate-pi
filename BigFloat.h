@@ -12,12 +12,12 @@
 #include <sstream>
 
 class BigFloat
-{	
+{
 	private:
 		char sign;
 		std::deque<char> number;
 		int decimals;
-		
+
 		//Error Checking
 		bool error;
 		std::string error_code;
@@ -41,7 +41,7 @@ class BigFloat
 		BigFloat(std::string strNum) { *this=strNum; };
 		BigFloat(int Num) { *this=Num; };
 		BigFloat(double Num) { *this=Num; };
-		
+
 		//Assignment operators
 		BigFloat& operator=(const char* strNum);
 		BigFloat& operator=(std::string strNum);
@@ -67,6 +67,8 @@ class BigFloat
 		static BigFloat PrecDiv(const BigFloat& left, const BigFloat& right,int div_precision);
 		static BigFloat PrecDiv(const BigFloat& left, const int& int_right,int div_precision);
 		static BigFloat PrecDiv(const BigFloat& left, const double& double_right,int div_precision);
+
+		void abs();
 		
 		friend BigFloat operator%(const BigFloat& left, const BigFloat& right);
 		friend BigFloat operator%(const BigFloat& left, const int& int_right);
@@ -130,6 +132,5 @@ class BigFloat
 		std::string Exp() const;
 		
 };
-
 
 #endif
