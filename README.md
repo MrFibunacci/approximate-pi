@@ -1,6 +1,6 @@
 # approximate-pi
 
-A simple approximation of the circle constant pi using a "[monte carlo](https://en.wikipedia.org/wiki/Monte_Carlo_algorithm)" method.
+A simple approximation of the circle constant pi using the "[monte carlo](https://en.wikipedia.org/wiki/Monte_Carlo_algorithm)" method.
 
 # monte calo algorithm
 My implementaion is simple I use an modified verion of `rand()`,just that I get an double within an range, to drop my points.
@@ -10,7 +10,7 @@ My calculation in `approximatePI()` is:
 
 ## how it works
 
-its simple we throw dots on an imaginary square with an cirlce in it (with `a = r^2`) and count how many dots are in the circle and how many we have in total. Than we do the calculation from above.
+It's simple we throw dots on an imaginary square with an cirlce in it (with `a = r^2`) and count how many dots are in the circle and how many we have in total. Than we do the calculation from above.
 
 The determination rater the dot is in the circle or not is done by using Pythagoras rule a^2 + b^2 = c^2 to calculate the distance between the centre and the point.
 If the result is greater than the radius its not in the circle.
